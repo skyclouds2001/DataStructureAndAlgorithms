@@ -1,0 +1,26 @@
+单调栈则主要用于解决NGE问题（Next Greater Element）
+
+NGE问题：对序列中每个元素，找到下一个比它大/小的元素
+
+时间复杂度是O(n)
+
+算法思想：维护一个栈，表示“待确定NGE的元素”，然后遍历序列。依次比较新元素与栈顶，如果新元素比栈顶大，则弹出栈顶并继续比较，直到新元素不比栈顶大，再将新元素压入栈
+
+for(int i=n;i>=1;--i)
+{
+        while(not S.empty() and a[S.top()]<=a[i])
+                S.pop();
+        ans[i]=S.empty()?0:S.top();
+        S.push(i);
+}
+
+stack<int> S;
+for (int i = 1; i <= n; ++i)
+{
+        while (!S.empty() && V[S.top()] < V[i])
+        {
+            ans[S.top()] = i;
+            S.pop();
+        }
+        S.push(i);
+}

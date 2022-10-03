@@ -1,0 +1,70 @@
+并查集用于解决一些元素分组的问题，支持两种操作：
+	合并（Union）：把两个不相交的集合合并为一个集合
+	查询（Find）：查询两个元素是否在同一个集合中
+
+算法思想：用集合中的一个元素代表集合
+	这是一个树状的结构，要寻找集合的代表元素，只需要一层一层往上访问父节点，直达树的根节点即可，而根节点的父节点是它自己
+初始化：
+int fa[MAXN];
+inline void init(int n)
+{
+    for (int i = 1; i <= n; ++i)
+        fa[i] = i;
+}
+查询：
+int find(int x)
+{
+    if(fa[x] == x)
+        return x;
+    else
+        return fa[x]=find(fa[x]);
+}
+合并：
+inline void merge(int i, int j)
+{
+    fa[find(i)] = find(j);
+}
+
+按秩合并优化：
+初始化（按秩合并）
+inline void init(int n)
+{
+    for (int i = 1; i <= n; ++i)
+    {
+        fa[i] = i;
+        rank[i] = 1;
+    }
+}
+合并（按秩合并）
+inline void merge(int i, int j)
+{
+    int x = find(i), y = find(j);    //先找到两个根节点
+    if (rank[x] <= rank[y])
+        fa[x] = y;
+    else
+        fa[y] = x;
+    if (rank[x] == rank[y] && x != y)
+        rank[y]++;                   //如果深度相同且根节点不同，则新的根节点的深度+1
+}
+
+种类并查集用于维护的是循环对称的关系
+
+int fa[40005], rank[40005];  //以下为并查集
+int find(int a)
+{
+    return (fa[a] == a) ? a : (fa[a] = find(fa[a]));
+}
+int query(int a, int b)
+{
+    return find(a) == find(b);
+}
+void merge(int a, int b)
+{
+    int x = find(a), y = find(b);
+    if (rank[x] >= rank[y])
+        fa[y] = x;
+    else
+        fa[x] = y;
+    if (rank[x] == rank[y] && x != y)
+        rank[x]++;
+}

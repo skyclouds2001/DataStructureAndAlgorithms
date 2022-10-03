@@ -1,0 +1,53 @@
+树状数组可以实现单点修改 + 区间查询问题
+改进版可以实现区间修改 + 单点查询{使用差分思想}
+甚至可以实现区间修改 + 区间查询{使用前缀和思想}
+
+时间复杂度为O(logn)
+
+单点修改 + 区间查询：
+void add(int p, int x){	 //给位置p增加x
+    while(p <= n)
+        sum[p] += x, p += p & -p;
+}
+int ask(int p){ 	//求位置p的前缀和
+    int res = 0;
+    while(p)
+        res += sum[p], p -= p & -p;
+    return res;
+}
+int range_ask(int l, int r){ 	//区间求和
+    return ask(r) - ask(l - 1);
+}
+
+区间修改 + 单点查询：
+void add(int p, int x){ 	//这个函数用来在树状数组中直接修改
+    while(p <= n)
+        sum[p] += x, p += p & -p;
+}
+void range_add(int l, int r, int x){	 //给区间[l, r]加上x
+    add(l, x), add(r + 1, -x);
+}
+int ask(int p){ 	//单点查询
+    int res = 0;
+    while(p)
+        res += sum[p], p -= p & -p;
+    return res;
+}
+
+区间修改 + 区间查询：
+void add(ll p, ll x){
+    for(int i = p; i <= n; i += i & -i)
+        sum1[i] += x, sum2[i] += x * p;
+}
+void range_add(ll l, ll r, ll x){
+    add(l, x), add(r + 1, -x);
+}
+ll ask(ll p){
+    ll res = 0;
+    for(int i = p; i; i -= i & -i)
+        res += (p + 1) * sum1[i] - sum2[i];
+    return res;
+}
+ll range_ask(ll l, ll r){
+    return ask(r) - ask(l - 1);
+}
