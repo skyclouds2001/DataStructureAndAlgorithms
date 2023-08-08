@@ -55,11 +55,17 @@ class _Promise {
      * @returns {void}
      */
     const resolve = (result) => {
-      if (this.status === _Promise.PENDING) {
-        this.status = _Promise.FULFILLED
-        this.result = result
-        this.onFulfilledCallbacks.forEach(fn => fn())
-      }
+      _Promise.resolvePromise(this, result, result => {
+        if (this.status === _Promise.PENDING) {
+          this.status = _Promise.FULFILLED
+          this.result = result
+          this.onFulfilledCallbacks.forEach(fn => {
+            fn()
+          })
+        }
+      }, reason => {
+        reject(reason)
+      })
     }
 
     /**
@@ -70,7 +76,9 @@ class _Promise {
       if (this.status === _Promise.PENDING) {
         this.status = _Promise.REJECTED
         this.reason = reason
-        this.onRejectedCallbacks.forEach(fn => fn())
+        this.onRejectedCallbacks.forEach(fn => {
+          fn()
+        })
       }
     }
 
@@ -129,7 +137,7 @@ class _Promise {
     }
 
     const promise = new _Promise((resolve, reject) => {
-      if (this.status === _Promise.FULFILLED) {
+      const handleOnFulfilled = () => {
         setTimeout(() => {
           try {
             const res = onFulfilled(this.result)
@@ -140,7 +148,7 @@ class _Promise {
         }, 0)
       }
 
-      if (this.status === _Promise.REJECTED) {
+      const handleOnRejected = () => {
         setTimeout(() => {
           try {
             const res = onRejected(this.reason)
@@ -151,28 +159,17 @@ class _Promise {
         }, 0)
       }
 
-      if (this.status === _Promise.PENDING) {
-        this.onFulfilledCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const res = onFulfilled(this.result)
-              _Promise.resolvePromise(promise, res, resolve, reject)
-            } catch (error) {
-              reject(error)
-            }
-          }, 0)
-        })
+      if (this.status === _Promise.FULFILLED) {
+        handleOnFulfilled()
+      }
 
-        this.onRejectedCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const res = onRejected(this.reason)
-              _Promise.resolvePromise(promise, res, resolve, reject)
-            } catch (error) {
-              reject(error)
-            }
-          }, 0)
-        })
+      if (this.status === _Promise.REJECTED) {
+        handleOnRejected()
+      }
+
+      if (this.status === _Promise.PENDING) {
+        this.onFulfilledCallbacks.push(handleOnFulfilled)
+        this.onRejectedCallbacks.push(handleOnRejected)
       }
     })
 
@@ -266,11 +263,7 @@ class _Promise {
       return reject(new TypeError('Chaining cycle detected for promise'))
     }
 
-    if (response === null) {
-      resolve(response)
-    }
-
-    if (typeof response !== 'object' && typeof response !== 'function') {
+    if (response === null || typeof response !== 'object' && typeof response !== 'function') {
       resolve(response)
     }
 
