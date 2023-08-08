@@ -38,6 +38,14 @@ class _Promise {
    */
   static REJECTED = 'rejected'
 
+  static get [Symbol.species]() {
+    return this
+  }
+
+  static get [Symbol.toStringTag]() {
+    return '_Promise'
+  }
+
   /**
    * @param {(resolve: (result: any) => void, reject: (reason: any) => void) => void} executor
    * @public
@@ -186,6 +194,21 @@ class _Promise {
   }
 
   /**
+   * @param {() => any} onFinally
+   * @returns {_Promise}
+   * @public
+   */
+  finally(onFinally) {
+    return this.then((value) => {
+      return Promise.resolve(onFinally()).then(() => value)
+    }, (reason) => {
+      return Promise.resolve(onFinally()).then(() => {
+        throw reason
+      })
+    })
+  }
+
+  /**
    * @param {any} result
    * @returns {_Promise}
    * @public
@@ -210,7 +233,7 @@ class _Promise {
   }
 
   /**
-   * @param {_Promise[]} promises
+   * @param {{ [Symbol.iterator]: Function }} promises
    * @returns {_Promise}
    * @public
    * @static
@@ -241,7 +264,7 @@ class _Promise {
   }
 
   /**
-   * @param {_Promise[]} promises
+   * @param {{ [Symbol.iterator]: Function }} promises
    * @returns {_Promise}
    * @public
    * @static
@@ -283,7 +306,7 @@ class _Promise {
   }
 
   /**
-   * @param {_Promise[]} promises
+   * @param {{ [Symbol.iterator]: Function }} promises
    * @returns {_Promise}
    * @public
    * @static
@@ -314,7 +337,7 @@ class _Promise {
   }
 
   /**
-   * @param {_Promise[]} promises
+   * @param {{ [Symbol.iterator]: Function }} promises
    * @returns {_Promise}
    * @public
    * @static
