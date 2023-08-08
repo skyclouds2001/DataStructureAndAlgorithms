@@ -115,6 +115,7 @@ class _Promise {
    * @param {(result: any) => void | null} [onFulfilled]
    * @param {(reason: any) => void | null} [onRejected]
    * @returns {_Promise}
+   * @public
    */
   then(onFulfilled, onRejected) {
     if (typeof onFulfilled !== 'function') {
@@ -176,6 +177,30 @@ class _Promise {
     })
 
     return promise
+  }
+
+  /**
+   * @param {any} result
+   * @returns {_Promise}
+   * @public
+   * @static
+   */
+  static resolve(result) {
+    return new _Promise((resolve, reject) => {
+      resolve(result)
+    })
+  }
+
+  /**
+   * @param {any} reason
+   * @returns {_Promise}
+   * @public
+   * @static
+   */
+  static reject(reason) {
+    return new _Promise((resolve, reject) => {
+      reject(reason)
+    })
   }
 
   /**
