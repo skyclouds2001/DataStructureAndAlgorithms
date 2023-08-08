@@ -120,8 +120,8 @@ class _Promise {
   onRejectedCallbacks
 
   /**
-   * @param {(result: any) => void | null} [onFulfilled]
-   * @param {(reason: any) => void | null} [onRejected]
+   * @param {(result: any) => void | null | undefined} onFulfilled
+   * @param {(reason: any) => void | null | undefined} onRejected
    * @returns {_Promise}
    * @public
    */
@@ -177,6 +177,15 @@ class _Promise {
   }
 
   /**
+   * @param {(reason: any) => void | null | undefined} onRejected
+   * @returns {_Promise}
+   * @public
+   */
+  catch(onRejected) {
+    return this.then(null, onRejected)
+  }
+
+  /**
    * @param {any} result
    * @returns {_Promise}
    * @public
@@ -202,7 +211,7 @@ class _Promise {
 
   /**
    * @param {_Promise[]} promises
-   * @returns {any[]}
+   * @returns {_Promise}
    * @public
    * @static
    */
@@ -226,6 +235,79 @@ class _Promise {
           }
         }, reason => {
           reject(reason)
+        })
+      })
+    })
+  }
+
+  /**
+   * @param {_Promise[]} promises
+   * @returns {_Promise}
+   * @public
+   * @static
+   */
+  static allSettled(promises) {
+    const size = promises.length
+    const results = Array(size)
+    let count = 0
+
+    return new _Promise((resolve, reject) => {
+      if (size === 0) {
+        resolve([])
+      }
+
+      promises.forEach((promise, index) => {
+        _Promise.resolve(promise).then(value => {
+          results[index] = {
+            status: 'fulfilled',
+            value,
+          }
+          ++count
+
+          if (count === size) {
+            resolve(results)
+          }
+        }, reason => {
+          results[index] = {
+            status: 'rejected',
+            reason,
+          }
+          ++count
+
+          if (count === size) {
+            resolve(results)
+          }
+        })
+      })
+    })
+  }
+
+  /**
+   * @param {_Promise[]} promises
+   * @returns {_Promise}
+   * @public
+   * @static
+   */
+  static any(promises) {
+    const size = promises.length
+    const results = Array(size)
+    let count = 0
+
+    return new _Promise((resolve, reject) => {
+      if (size === 0) {
+        reject([])
+      }
+
+      promises.forEach((promise, index) => {
+        _Promise.resolve(promise).then(value => {
+          resolve(value)
+        }, reason => {
+          results[index] = reason
+          ++count
+
+          if (count === size) {
+            reject(results)
+          }
         })
       })
     })
