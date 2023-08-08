@@ -204,6 +204,55 @@ class _Promise {
   }
 
   /**
+   * @param {_Promise[]} promises
+   * @returns {any[]}
+   * @public
+   * @static
+   */
+  static all(promises) {
+    const size = promises.length
+    const results = Array(size)
+    let count = 0
+
+    return new _Promise((resolve, reject) => {
+      if (size === 0) {
+        resolve([])
+      }
+
+      promises.forEach((promise, index) => {
+        _Promise.resolve(promise).then(result => {
+          results[index] = result
+          ++count
+
+          if (count === size) {
+            resolve(results)
+          }
+        }, reason => {
+          reject(reason)
+        })
+      })
+    })
+  }
+
+  /**
+   * @param {_Promise[]} promises
+   * @returns {_Promise}
+   * @public
+   * @static
+   */
+  static race(promises) {
+    return new _Promise((resolve, reject) => {
+      promises.forEach(promise => {
+        _Promise.resolve(promise).then(result => {
+          resolve(result)
+        }, reason => {
+          reject(reason)
+        })
+      })
+    })
+  }
+
+  /**
    * @param {_Promise} promise
    * @param {any} response
    * @param {(result: any) => void} resolve
