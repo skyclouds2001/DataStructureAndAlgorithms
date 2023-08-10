@@ -1,6 +1,3 @@
-const assert = require("node:assert")
-const { describe, it } = require("node:test")
-
 /**
  * @param {Function} func
  * @param {...any} args
@@ -17,6 +14,9 @@ function curry(func, ...args) {
 }
 
 /***** test *****/
+
+const assert = require("node:assert")
+const { describe, it } = require("node:test")
 
 describe('curry', () => {
   const sum = (num1, num2, num3) => num1 + num2 + num3

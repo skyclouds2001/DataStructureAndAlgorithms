@@ -1,6 +1,3 @@
-const assert = require("assert")
-const { describe, before, after, it } = require("node:test")
-
 /**
  * @param {any} thisArgs
  * @param {...any} args
@@ -24,6 +21,9 @@ function call(thisArgs, ...args) {
 }
 
 /***** test *****/
+
+const assert = require("assert")
+const { describe, before, after, it } = require("node:test")
 
 describe('call', () => {
   const GLOBAL_NAME = 'global name'

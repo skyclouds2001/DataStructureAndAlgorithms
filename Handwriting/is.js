@@ -1,9 +1,11 @@
-const assert = require("node:assert")
-const { describe, it } = require("node:test")
-
 function is(x, y) {
   return x === y ? x !== 0 || 1 / x === 1 / y : x !== x && y !== y
 }
+
+/***** test *****/
+
+const assert = require("node:assert")
+const { describe, it } = require("node:test")
 
 describe('is', () => {
   it('should behave like Object.is() is', () => {
