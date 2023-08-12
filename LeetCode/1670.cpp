@@ -1,7 +1,3 @@
-#include "deque"
-
-using namespace std;
-
 class FrontMiddleBackQueue {
 private:
     deque<int> frontQueue;
