@@ -10,6 +10,9 @@
  * @see {@link https://github.com/promises-aplus/promises-tests}
  */
 
+const assert = require("node:assert")
+const { describe, it, mock, afterEach, beforeEach } = require("node:test")
+
 /**
  * personal promise accomplish
  */
@@ -401,13 +404,56 @@ class _Promise {
   }
 }
 
-_Promise.defer = _Promise.deferred = function () {
-  let dfd = {}
-  dfd.promise = new _Promise((resolve,reject)=>{
-    dfd.resolve = resolve;
-    dfd.reject = reject;
-  });
-  return dfd;
-}
+/***** test *****/
 
-module.exports = _Promise
+describe('Promise', () => {
+  const fn = mock.fn()
+
+  const sleep = (timeout) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, timeout);
+    })
+  }
+
+  beforeEach(() => {
+    fn.mock.restore()
+  })
+
+  afterEach(() => {
+    fn.mock.restore()
+  })
+
+  describe('The Promise Resolution Procedure', () => {
+    describe('If promise and x refer to the same object, reject promise with a TypeError as the reason', () => {
+      it('with a fulfilled promise', async () => {
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => promise, null)
+
+        await sleep(100)
+
+        promise.then(null, (reason) => {
+          assert(reason instanceof TypeError)
+        })
+
+        await sleep(100)
+      })
+
+      it('with a rejected promise', async () => {
+        const promise = new _Promise((resolve, reject) => {
+          reject()
+        }).then(null, () => promise)
+
+        await sleep(100)
+
+        promise.then(null, (reason) => {
+          assert(reason instanceof TypeError)
+        })
+
+        await sleep(100)
+      })
+    })
+  })
+})
