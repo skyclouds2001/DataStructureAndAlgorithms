@@ -1,8 +1,12 @@
-type F = (...args: any[]) => void
-
-function throttle(fn: F, t: number): F {
+/**
+ * @param fn {Function}
+ * @param t {number}
+ * @returns {Function}
+ */
+var throttle = function (fn, t) {
     let flag = false
-    let arg: any[] | null = null
+    let arg = null
+
     const handle = () => {
         if (arg) {
             fn(...arg)
@@ -12,6 +16,7 @@ function throttle(fn: F, t: number): F {
             flag = false
         }
     }
+
     return function (...args) {
         if (!flag) {
             fn(...args)

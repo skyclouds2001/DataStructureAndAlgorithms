@@ -1,7 +1,10 @@
-type Fn = (...params: any[]) => Promise<any>;
-
-function timeLimit(fn: Fn, t: number): Fn {
-	return async function(...args) {
+/**
+ * @param {Function} fn
+ * @param {number} t
+ * @return {Function}
+ */
+var timeLimit = function(fn, t) {
+    return function(...args) {
         return Promise.race([
             fn(...args),
             new Promise((_, reject) => {
