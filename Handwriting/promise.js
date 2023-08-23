@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const assert = require("node:assert")
+const { describe, it, mock, afterEach, beforeEach } = require("node:test")
+
 /**
  * @file personal promise accomplish
  * @version 0.0.0
@@ -7,14 +10,8 @@
  * @copyright skyclouds2001 2023-present
  * @license MIT
  * @since 0.0.0
- * @see {@link https://github.com/promises-aplus/promises-tests}
- */
-
-const assert = require("node:assert")
-const { describe, it, mock, afterEach, beforeEach } = require("node:test")
-
-/**
- * personal promise accomplish
+ * @see {@link https://promisesaplus.com/ | promises A+}
+ * @see {@link https://github.com/promises-aplus/promises-tests | promises-tests}
  */
 class _Promise {
   /**
@@ -426,7 +423,7 @@ describe('Promise', () => {
   })
 
   describe('The Promise Resolution Procedure', () => {
-    describe('If promise and x refer to the same object, reject promise with a TypeError as the reason', () => {
+    describe('2.3.1: If promise and x refer to the same object, reject promise with a TypeError as the reason', () => {
       it('with a fulfilled promise', async () => {
         const promise = new _Promise((resolve, reject) => {
           resolve()
@@ -450,6 +447,88 @@ describe('Promise', () => {
 
         promise.then(null, (reason) => {
           assert(reason instanceof TypeError)
+        })
+
+        await sleep(100)
+      })
+    })
+
+    describe('2.3.4: If `x` is not an object or function, fulfill `promise` with `x`', () => {
+      it('x is a number', async () => {
+        const VALUE = 0
+
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => VALUE)
+
+        await sleep(100)
+
+        promise.then((val) => {
+          assert.strictEqual(val, VALUE)
+        })
+
+        await sleep(100)
+      })
+
+      it('x is a string', async () => {
+        const VALUE = ''
+
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => VALUE)
+
+        await sleep(100)
+
+        promise.then((val) => {
+          assert.strictEqual(val, VALUE)
+        })
+
+        await sleep(100)
+      })
+
+      it('x is a boolean', async () => {
+        const VALUE = false
+
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => VALUE)
+
+        await sleep(100)
+
+        promise.then((val) => {
+          assert.strictEqual(val, VALUE)
+        })
+
+        await sleep(100)
+      })
+
+      it('x is null', async () => {
+        const VALUE = null
+
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => VALUE)
+
+        await sleep(100)
+
+        promise.then((val) => {
+          assert.strictEqual(val, VALUE)
+        })
+
+        await sleep(100)
+      })
+
+      it('x is undefined', async () => {
+        const VALUE = undefined
+
+        const promise = new _Promise((resolve, reject) => {
+          resolve()
+        }).then(() => VALUE)
+
+        await sleep(100)
+
+        promise.then((val) => {
+          assert.strictEqual(val, VALUE)
         })
 
         await sleep(100)
