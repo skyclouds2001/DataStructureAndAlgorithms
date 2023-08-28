@@ -14,3 +14,32 @@ public:
         return v;
     }
 };
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        stack<TreeNode*> s;
+        vector<int> v;
+
+        if (root == nullptr) {
+            return v;
+        }
+
+        s.push(root);
+        while(!s.empty()) {
+            TreeNode* t = s.top();
+            s.pop();
+
+            v.push_back(t -> val);
+
+            if (t -> right != nullptr) {
+                s.push(t -> right);
+            }
+            if (t -> left != nullptr) {
+                s.push(t -> left);
+            }
+        }
+
+        return v;
+    }
+};
