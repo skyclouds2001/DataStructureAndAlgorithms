@@ -14,3 +14,34 @@ public:
         return v;
     }
 };
+
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> s;
+        vector<int> v;
+
+        if (root == nullptr) {
+            return v;
+        }
+
+        s.push(root);
+        while(!s.empty()) {
+            TreeNode* t = s.top();
+            s.pop();
+
+            v.push_back(t -> val);
+
+            if (t -> left != nullptr) {
+                s.push(t -> left);
+            }
+            if (t -> right != nullptr) {
+                s.push(t -> right);
+            }
+        }
+
+        reverse(v.begin(), v.end());
+
+        return v;
+    }
+};
