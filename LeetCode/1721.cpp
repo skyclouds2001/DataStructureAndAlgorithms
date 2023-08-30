@@ -26,7 +26,7 @@ public:
         pe = pe -> next;
 
         if (ps == pe) {
-            //
+            return p -> next;
         } else if (ps == pel && pe == psr) {
             psl -> next = pe;
             ps -> next = per;

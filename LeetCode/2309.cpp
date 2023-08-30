@@ -4,12 +4,6 @@ public:
         string ans = "";
         int flags[26] = {0};
         for (auto c: s) {
-            /**
-             * * 0 - unmet
-             * * 1 - lower
-             * * 2 - upper
-             * * 3 - both
-             */
             if (islower(c)) {
                 int step = c - 'a';
                 cout << c << " " << step<< " " << flags[step] << endl;

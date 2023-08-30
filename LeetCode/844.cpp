@@ -2,7 +2,7 @@ class Solution {
 public:
     bool backspaceCompare(string s, string t) {
         int slen = s.length();
-        int f1 = 0, s1 = 0; // f-字符串当前遍历位置 s-字符串赋值位置
+        int f1 = 0, s1 = 0;
         char ss[300] = {'\0'};
         strcpy(ss, s.c_str());
         char sss[300] = {'\0'};
@@ -19,7 +19,7 @@ public:
             ++f1;
         }
         int tlen = t.length();
-        int f2 = 0, s2 = 0; // f-字符串当前遍历位置 s-字符串赋值位置
+        int f2 = 0, s2 = 0;
         char tt[300] = {'\0'};
         strcpy(tt, t.c_str());
         char ttt[300] = {'\0'};

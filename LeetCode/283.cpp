@@ -2,8 +2,8 @@ class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
         int len = nums.size();
-        int fast = 0; // 当前遍历位置
-        int slow = 0; // 当前待赋值位置
+        int fast = 0;
+        int slow = 0;
         while (fast < len) {
             if (nums[fast] != 0) {
                 if (fast != slow) {
