@@ -16,13 +16,11 @@ public:
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
-        if (root == nullptr) {
-            return root;
+        stack<TreeNode*> stack;
+        if (root != nullptr) {
+            stack.push(root);
         }
 
-        stack<TreeNode*> stack;
-
-        stack.push(root);
         while(!stack.empty()) {
             TreeNode* node = stack.top();
             stack.pop();
@@ -33,6 +31,34 @@ public:
             }
             if (node -> right != nullptr) {
                 stack.push(node -> right);
+            }
+        }
+
+        return root;
+    }
+};
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        queue<TreeNode*> queue;
+        if (root != nullptr) {
+            queue.push(root);
+        }
+
+        while(!queue.empty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode* node = queue.front();
+                queue.pop();
+
+                swap(node -> left, node -> right);
+                if (node -> left != nullptr) {
+                    queue.push(node -> left);
+                }
+                if (node -> right != nullptr) {
+                    queue.push(node -> right);
+                }
             }
         }
 
