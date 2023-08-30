@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> levelOrderBottom(TreeNode* root) {
         queue<TreeNode*> queue;
         if (root != nullptr) {
             queue.push(root);
@@ -28,32 +28,8 @@ public:
             result.push_back(v);
         }
 
+        reverse(result.begin(), result.end());
+
         return result;
-    }
-};
-
-class Solution {
-private:
-    void order(TreeNode* node, vector<vector<int>>& v, int depth) {
-        if (node == nullptr) {
-            return;
-        }
-
-        if (v.size() == depth) {
-            v.push_back(vector<int>());
-        }
-
-        v[depth].push_back(node -> val);
-
-        order(node -> left, v, depth + 1);
-        order(node -> right, v, depth + 1);
-    }
-public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> v;
-
-        order(root, v, 0);
-
-        return v;
     }
 };
