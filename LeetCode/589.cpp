@@ -1,4 +1,26 @@
 class Solution {
+private:
+    void traversal(Node* p, vector<int>& v) {
+        if (p == nullptr) {
+            return;
+        }
+
+        v.push_back(p -> val);
+        for (auto p: p -> children) {
+            traversal(p, v);
+        }
+    }
+public:
+    vector<int> preorder(Node* root) {
+        vector<int> v;
+
+        traversal(root, v);
+
+        return v;
+    }
+};
+
+class Solution {
 public:
     vector<int> preorder(Node* root) {
         stack<Node*> s;
