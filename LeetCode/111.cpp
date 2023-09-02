@@ -22,3 +22,40 @@ public:
         return depth;
     }
 };
+
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        queue<TreeNode*> q;
+        int depth = 0;
+
+        if (root != nullptr) {
+            q.push(root);
+        }
+
+        while (!q.empty()) {
+            const int size = q.size();
+
+            ++depth;
+
+            for (int i = 0; i < size; ++i) {
+                TreeNode* p = q.front();
+                q.pop();
+
+                if (p -> left == nullptr && p -> right == nullptr) {
+                    goto EXIT;
+                }
+                if (p -> left != nullptr) {
+                    q.push(p -> left);
+                }
+                if (p -> right != nullptr) {
+                    q.push(p -> right);
+                }
+            }
+        }
+
+        EXIT:
+
+        return depth + 1;
+    }
+};
