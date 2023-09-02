@@ -12,3 +12,31 @@ public:
         return depth;
     }
 };
+
+class Solution {
+    int result = 0;
+
+    void getDepth(TreeNode* node, int depth) {
+        result = max(result, depth);
+
+        if (node -> left != nullptr) {
+            ++depth;
+            getDepth(node -> left, depth);
+            --depth;
+        }
+
+        if (node -> right != nullptr) {
+            ++depth;
+            getDepth(node -> right, depth);
+            --depth;
+        }
+    }
+public:
+    int maxDepth(TreeNode* root) {
+        if (root != nullptr) {
+            getDepth(root, 1);
+        }
+
+        return result;
+    }
+};
