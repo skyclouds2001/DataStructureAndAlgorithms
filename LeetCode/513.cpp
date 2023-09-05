@@ -27,3 +27,35 @@ public:
         return ans;
     }
 };
+
+class Solution {
+private:
+    int res;
+    int maxDepth = INT_MIN;
+    void traversal(TreeNode* node, int depth) {
+        if (node -> left == nullptr && node -> right == nullptr) {
+            if (depth > maxDepth) {
+                maxDepth = depth;
+                res = node -> val;
+            }
+            return;
+        }
+
+        if (node -> left != nullptr) {
+            ++depth;
+            traversal(node -> left, depth);
+            --depth;
+        }
+
+        if (node -> right != nullptr) {
+            ++depth;
+            traversal(node -> right, depth);
+            --depth;
+        }
+    }
+public:
+    int findBottomLeftValue(TreeNode* root) {
+        traversal(root, 0);
+        return res;
+    }
+};
