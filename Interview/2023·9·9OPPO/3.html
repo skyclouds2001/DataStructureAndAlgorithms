@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>o3</title>
+    <style>
+        .progress-ring {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .progress-ring .circle {
+            fill: none;
+            stroke: #ddd;
+            stroke-width: 20;
+        }
+
+        .progress-ring .progress {
+            fill: none;
+            stroke: #0d7137;
+            stroke-width: 20;
+            stroke-dasharray: 0, 1000;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-ring">
+        <svg viewBox="0 0 100 100">
+            <circle class="circle" cx="50" cy="50" r="40"></circle>
+            <circle class="progress" cx="50" cy="50" r="40"></circle>
+        </svg>
+    </div>
+    <input type="number" id="percentageInput" placeholder="输入百分比（0-100）">
+    <button onclick="updateProgress()">更新进度</button>
+
+    <script>
+        function updateProgress() {
+            const percentageInput = document.getElementById('percentageInput');
+            const percentage = parseInt(percentageInput.value, 10);
+
+            if (Number.isNaN(percentage) || (percentage < 0 || percentage > 100)) {
+                return null;
+            }
+
+            const progressRing = document.querySelector('.progress-ring');
+            const progressCircle = progressRing.querySelector('.progress');
+            const circumference = 2 * Math.PI * 40;
+
+            const offset = percentage / 100 * circumference
+            progressCircle.style.strokeDasharray = `${offset}, ${circumference}`
+        }
+    </script>
+</body>
+</html>
