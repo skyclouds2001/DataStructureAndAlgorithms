@@ -5,7 +5,7 @@ private:
             return nullptr;
         }
 
-        int index = (left + right) / 2;
+        int index = left + ((right - left) / 2);
 
         TreeNode* l = traversal(nums, left, index - 1);
         TreeNode* r = traversal(nums, index + 1, right);
