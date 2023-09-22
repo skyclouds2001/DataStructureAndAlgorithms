@@ -1,22 +1,16 @@
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int n = matrix.at(0).size();
-        int m = matrix.size();
-
-        vector<vector<bool>> visited(m, vector<bool>(n));
-
-        vector<int> res;
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans(n, vector<int>(n));
 
         int flag = 0;
         int x = 0, y = 0;
-        for (int i = 0; i < n * m; ++i) {
-            res.push_back(matrix[x][y]);
-            visited[x][y] = true;
+        for (int i = 0; i < n * n; ++i) {
+            ans[x][y] = i;
 
             switch (flag % 4) {
                 case 0:
-                    if (y >= n - 1 || visited[x][y + 1]) {
+                    if (y + 1 >= n || ans[x][y + 1] != 0) {
                         ++flag;
                         ++x;
                     } else {
@@ -24,7 +18,7 @@ public:
                     }
                     break;
                 case 1:
-                    if (x >= m - 1 || visited[x + 1][y]) {
+                    if (x + 1 >= n || ans[x + 1][y] != 0) {
                         ++flag;
                         --y;
                     } else {
@@ -32,7 +26,7 @@ public:
                     }
                     break;
                 case 2:
-                    if (y <= 0 || visited[x][y - 1]) {
+                    if (y - 1 < 0 || ans[x][y - 1] != 0) {
                         ++flag;
                         --x;
                     } else {
@@ -40,7 +34,7 @@ public:
                     }
                     break;
                 case 3:
-                    if (x <= 0 || visited[x - 1][y]) {
+                    if (x - 1 < 0 || ans[x - 1][y] != 0) {
                         ++flag;
                         ++y;
                     } else {
@@ -50,6 +44,6 @@ public:
             }
         }
 
-        return res;
+        return ans;
     }
 };
