@@ -75,3 +75,9 @@
 #include "valarray"
 
 using namespace std;
+
+int main() {
+    // implement here
+
+    return 0;
+}
