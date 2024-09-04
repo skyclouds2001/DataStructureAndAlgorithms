@@ -6,19 +6,19 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', function (data: string) {
-  const str = data.trim()
-  const len = str.length
+    const str = data.trim()
+    const len = str.length
 
-  let t = 0
-  while (len - t >= 8) {
-    console.log(str.slice(t, t + 8))
-    t += 8
-  }
+    let t = 0
+    while (len - t >= 8) {
+        console.log(str.slice(t, t + 8))
+        t += 8
+    }
 
-  if (t === len) return
-  let res = str.slice(t)
-  while (res.length < 8) {
-    res += '0'
-  }
-  console.log(res)
+    if (t === len) return
+    let res = str.slice(t)
+    while (res.length < 8) {
+        res += '0'
+    }
+    console.log(res)
 });

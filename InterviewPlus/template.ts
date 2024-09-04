@@ -1,7 +1,7 @@
 // @ts-check
 /// <reference path="./template.d.ts" />
 
-export {}
+export { }
 
 const readline = require('readline');
 
@@ -11,5 +11,5 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', function (data: string) {
-  console.log(data);
+    console.log(data);
 });

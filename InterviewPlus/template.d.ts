@@ -1,5 +1,5 @@
 declare module 'readline'
 
-declare var process
+declare var process: any
 
-declare var require: Function
+declare var require: (id: string) => any
