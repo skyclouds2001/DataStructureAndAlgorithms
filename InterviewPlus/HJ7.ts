@@ -1,10 +1,10 @@
 const readline = require('readline');
 
 const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+  input: process.stdin,
+  output: process.stdout
 });
 
 rl.on('line', function (line) {
-    console.log(Math.round(Number.parseFloat(line) + Number.EPSILON))
+  console.log(Math.round(Number.parseFloat(line) + Number.EPSILON))
 });
