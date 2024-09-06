@@ -1,4 +1,7 @@
 // @ts-check
+/// <reference no-default-lib="true"/>
+/// <reference lib="es2023" />
+/// <reference lib="dom" />
 /// <reference path="./template.d.ts" />
 
 export { }
