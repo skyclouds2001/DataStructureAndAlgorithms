@@ -21,7 +21,7 @@ bool isPrime(long long n) {
     return true;
 }
 
-int main() {
+int main(int argc, char const *argv[]) {
     long long input;
     cin >> input;
     long long num = input;

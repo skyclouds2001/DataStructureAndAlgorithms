@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char const *argv[]) {
     string s;
     while (cin >> s) {
         bool flag = true;

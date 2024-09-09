@@ -24,7 +24,7 @@ int dp[60 + 1][32000 + 1];
 
 int v, p, q;
 
-int main() {
+int main(int argc, char const *argv[]) {
     cin >> N >> m;
 
     for (int k = 1; k <= m; ++k) {

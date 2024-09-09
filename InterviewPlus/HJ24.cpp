@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char const *argv[]) {
     vector<int> line;
     int n, t;
     cin >> n;

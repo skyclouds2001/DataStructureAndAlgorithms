@@ -50,7 +50,7 @@ void resolve(string& s, int& x, int& y) {
     s.clear();
 }
 
-int main() {
+int main(int argc, char const *argv[]) {
     int x = 0, y = 0;
     string str, s;
     cin >> str;
