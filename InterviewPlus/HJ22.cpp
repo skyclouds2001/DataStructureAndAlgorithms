@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char const *argv[]) {
     while(true) {
         int cnt;
         cin >> cnt;
