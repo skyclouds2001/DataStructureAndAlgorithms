@@ -8,9 +8,3 @@ const rl = readline.createInterface({
 rl.on('line', function (data: string) {
   console.log(data)
 })
-
-declare module 'readline'
-
-declare var process: any
-
-declare var require: (id: string) => any
