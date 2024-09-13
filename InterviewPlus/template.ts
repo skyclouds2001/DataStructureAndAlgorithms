@@ -1,11 +1,3 @@
-// @ts-check
-/// <reference no-default-lib="true"/>
-/// <reference lib="esnext" />
-/// <reference lib="dom" />
-/// <reference path="./template.d.ts" />
-
-export { }
-
 const readline = require('readline')
 
 const rl = readline.createInterface({
@@ -16,3 +8,9 @@ const rl = readline.createInterface({
 rl.on('line', function (data: string) {
   console.log(data)
 })
+
+declare module 'readline'
+
+declare var process: any
+
+declare var require: (id: string) => any
