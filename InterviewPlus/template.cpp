@@ -4,7 +4,10 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-    // implement here
+    string str;
+    cin >> str;
+
+    cout << str << endl;
 
     return 0;
 }
