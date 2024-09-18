@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width: 100px; height: 100px;">
+        <div style="transform: translateX(-50%); position: relative; left: 50%;">center</div>
+    </div>
+    <div style="width: 100px; height: 100px; display: flex; justify-content: center; align-items: center;">
+        <div>center</div>
+    </div>
+    <div style="width: 100px; height: 100px; display: grid; place-content: center;">
+        <div>center</div>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div style="width: 100px;">left</div>
+        <div style="width: calc(100% - 100px * 2);">center</div>
+        <div style="width: 100px;">right</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px;">
+        <div>left</div>
+        <div>center</div>
+        <div>right</div>
+    </div>
+
+    <div style="width: 100px; height: 1em; line-height: 1em; overflow: hidden; text-overflow: ellipsis; word-break: keep-all; word-wrap: normal; -webkit-line-clamp: 1;">13e133 3221dscf sfvdsfg fvdssfds fdsfsfdfs sad31d fsaf</div>
+</body>
+</html>
