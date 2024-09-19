@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li data-id="0">.</li>
+    <li data-id="1">.</li>
+    <li data-id="2">.</li>
+  </ul>
+  <script type="text/javascript">
+    document.querySelector('ul').onclick = event => {
+      event.target.innerText += '.'
+    }
+  </script>
+</body>
+
+</html>

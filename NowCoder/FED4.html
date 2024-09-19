@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    const _quickSort = array => {
+      if (array == null || array.length === 0) {
+        return array
+      }
+
+      const pos = array[0]
+      const left = [], right = []
+      for (let i = 1; i < array.length; ++i) {
+        if (pos > array[i]) {
+          left.push(array[i])
+        } else {
+          right.push(array[i])
+        }
+      }
+
+      _quickSort(left)
+      _quickSort(right)
+
+      return [...left, pos, ...right]
+    }
+  </script>
+</body>
+
+</html>

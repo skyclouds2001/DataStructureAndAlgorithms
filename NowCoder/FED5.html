@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* 填写样式 */
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    const _permute = str => {
+      const len = str.length
+      const arr = str.split('')
+      const flag = Array(len).fill(false)
+      const output = []
+
+      const find = (s, step) => {
+        if (step === len) {
+          output.push(s)
+          return
+        }
+        for (let i = 0; i < len; ++i) {
+          if (!flag[i]) {
+            flag[i] = true
+            find(s + str[i], step + 1)
+            flag[i] = false
+          }
+        }
+      }
+
+      find('', 0)
+
+      return output
+    }
+  </script>
+</body>
+
+</html>
