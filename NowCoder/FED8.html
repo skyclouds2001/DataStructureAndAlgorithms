@@ -2,26 +2,26 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <style>
-    </style>
+  <meta charset="UTF-8">
+  <style>
+  </style>
 </head>
 
 <body>
-    <script type="text/javascript">
-        Array.prototype._filter = function (Fn, thisArg = this) {
-            if (typeof Fn !== 'function') {
-                throw new TypeError(`${typeof Fn} ${Fn} is not a function`)
-            }
-            const arr = []
-            for (let i = 0; i < this.length; ++i) {
-                if (Fn.call(thisArg, this[i], i, this)) {
-                    arr.push(this[i])
-                }
-            }
-            return arr
+  <script type="text/javascript">
+    Array.prototype._filter = function (Fn, thisArg = this) {
+      if (typeof Fn !== 'function') {
+        throw new TypeError(`${typeof Fn} ${Fn} is not a function`)
+      }
+      const arr = []
+      for (let i = 0; i < this.length; ++i) {
+        if (Fn.call(thisArg, this[i], i, this)) {
+          arr.push(this[i])
         }
-    </script>
+      }
+      return arr
+    }
+  </script>
 </body>
 
 </html>
