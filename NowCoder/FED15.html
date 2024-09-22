@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    const _shallowClone = target => {
+      switch (true) {
+        case target == null:
+        case typeof target !== 'object':
+        case Object.prototype.toString.call(target) === '[object Date]':
+        case Object.prototype.toString.call(target) === '[object RegExp]':
+        case Object.prototype.toString.call(target) === '[object Function]':
+          return target
+        case (Array.isArray(target)):
+          const arr = []
+          target.forEach((item) => {
+            arr.push(item)
+          })
+          return arr
+        case (typeof target === 'object'):
+          const obj = Object.create(Object.getPrototypeOf(target))
+          Object.keys(target).forEach((key) => {
+            Object.defineProperty(obj, key, Object.getOwnPropertyDescriptor(target, key))
+          })
+          return obj
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    Function.prototype._call = function (target, ...args) {
+      const key = Symbol()
+      target[key] = this
+      const res = target[key](...args)
+      delete target[key]
+      return res
+    }
+  </script>
+</body>
+
+</html>

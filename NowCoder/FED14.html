@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    const _objectFreeze = object => {
+      if (typeof object !== "object" || object == null) {
+        return object
+      }
+
+      Object.preventExtensions(object)
+
+      const keys = Object.getOwnPropertyNames(object)
+      const symbols = Object.getOwnPropertySymbols(object)
+
+      for (const key of keys) {
+        Object.defineProperty(object, key, {
+          value: object[key],
+          configurable: false,
+          writable: false,
+        })
+      }
+
+      for (const symbol of symbols) {
+        Object.defineProperty(object, symbol, {
+          value: object[symbol],
+          configurable: false,
+          writable: false,
+        })
+      }
+
+      return object
+    }
+  </script>
+</body>
+
+</html>
