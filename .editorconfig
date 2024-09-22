@@ -9,3 +9,7 @@ indent_style = space
 indent_size = 4
 tab_width = 4
 max_line_length = 1000
+
+[*.{html,css,sass,scss,less,styl,stylus,js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}]
+indent_size = 2
+tab_width = 2
