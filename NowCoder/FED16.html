@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+  <script type="text/javascript">
+    const _sampleDeepClone = target => {
+      if (typeof target !== 'object' || target == null) {
+        return target
+      }
+
+      if (Array.isArray(target)) {
+        const arr = []
+        for (const val of target) {
+          if (typeof val === 'object' && val != null) {
+            arr.push(_sampleDeepClone(val))
+          } else {
+            arr.push(val)
+          }
+        }
+        return arr
+      } else {
+        const obj = {}
+        const keys = Object.getOwnPropertyNames(target)
+        const syms = Object.getOwnPropertySymbols(target)
+        for (const key of keys) {
+          const val = target[key]
+          if (typeof val === 'object' && val != null) {
+            obj[key] = _sampleDeepClone(val)
+          } else {
+            obj[key] = val
+          }
+        }
+        for (const sym of syms) {
+          const val = target[sym]
+          if (typeof val === 'object') {
+            obj[sym] = _sampleDeepClone(val)
+          } else {
+            obj[sym] = val
+          }
+        }
+        return obj
+      }
+    }
+  </script>
+</body>
+
+</html>

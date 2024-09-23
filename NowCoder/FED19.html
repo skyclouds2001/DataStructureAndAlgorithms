@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    class EventEmitter {
+      constructor () {
+        this.events = new Map()
+      }
+      on (event, fn) {
+        if (!this.events.has(event)) {
+          this.events.set(event, new Set())
+        }
+        this.events.get(event).add(fn)
+      }
+      emit (event, ...args) {
+        Array.from(this.events.get(event)).forEach(fn => {
+          fn(...args)
+        })
+      }
+    }
+  </script>
+</body>
+
+</html>

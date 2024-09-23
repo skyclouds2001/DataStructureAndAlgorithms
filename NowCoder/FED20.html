@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+  <script type="text/javascript">
+    class Observerd {
+      constructor (name, state = '走路') {
+        this.name = name
+        this.state = state
+        this.observers = new Set()
+      }
+      setObserver (observer) {
+        this.observers.add(observer)
+      }
+      setState (state) {
+        this.state = state
+        for (const observer of this.observers) {
+          observer.update(this.name, this.state)
+        }
+      }
+    }
+
+    class Observer {
+      update (name, state) {
+        console.log(`${name}正在${state}`)
+      }
+    }
+  </script>
+</body>
+
+</html>

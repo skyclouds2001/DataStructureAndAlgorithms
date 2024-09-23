@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+</head>
+
+<body>
+  <script type="text/javascript">
+    const _completeDeepClone = (target) => {
+      const map = new WeakMap()
+
+      const isObject = (obj) => typeof obj === 'object' && obj != null || typeof obj === 'function'
+
+      const _deepClone = (tg) => {
+        if (!isObject(tg)) {
+          return tg
+        }
+
+        if (tg.constructor === Date) {
+          return new Date(tg)
+        }
+
+        if (tg.constructor === RegExp) {
+          return new RegExp(tg)
+        }
+
+        if (typeof tg === 'function') {
+          return (new Function(`return ${tg.toString()}`))()
+        }
+
+        if (map.has(tg)) {
+          return map.get(tg)
+        }
+
+        if (tg instanceof Map) {
+          const mp = new Map()
+          map.set(tg, mp)
+          for (const [key, value] of tg) {
+            if (isObject(value)) {
+              mp.set(key, _deepClone(value))
+            } else {
+              mp.set(key, value)
+            }
+          }
+          return mp
+        }
+
+        if (tg instanceof Set) {
+          const st = new Set()
+          map.set(tg, st)
+          for (const value of tg) {
+            if (isObject(value)) {
+              st.add(_deepClone(value))
+            } else {
+              st.add(value)
+            }
+          }
+          return st
+        }
+
+        const descs = Object.getOwnPropertyDescriptors(tg)
+        const obj = Object.create(Object.getPrototypeOf(tg), descs)
+        map.set(tg, obj)
+        const keys = Reflect.ownKeys(tg)
+        for (const key of keys) {
+          if (isObject(tg[key])) {
+            obj[key] = _deepClone(tg[key])
+          } else {
+            obj[key] = tg[key]
+          }
+        }
+        return obj
+      }
+
+      return _deepClone(target)
+    }
+  </script>
+</body>
+
+</html>
