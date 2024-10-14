@@ -18,3 +18,22 @@ public:
         return count;
     }
 };
+
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int cnt = 0;
+        vector<vector<bool>> dp(s.length() + 1, vector<bool>(s.length() + 1, false));
+
+        for (int i = s.length(); i >= 1; i--) {
+            for (int j = i; j <= s.length(); j++) {
+                if (s[i - 1] == s[j - 1] && (j - i == 0 || j - i == 1 || dp[i + 1][j - 1])) {
+                    ++cnt;
+                    dp[i][j] = true;
+                }
+            }
+        }
+
+        return cnt;
+    }
+};
