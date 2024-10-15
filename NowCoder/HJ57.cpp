@@ -9,14 +9,14 @@ string total;
 
 int main(int argc, char const *argv[]) {
     cin >> num1 >> num2;
-    
+
     reverse(num1.begin(), num1.end());
     reverse(num2.begin(), num2.end());
 
     int lmax = max(num1.length(), num2.length());
     int lmin = min(num1.length(), num2.length());
     int ap = 0;
-    
+
     for(int i = 0; i < lmin; ++i) {
         int n1 = num1[i] - '0';
         int n2 = num2[i] - '0';

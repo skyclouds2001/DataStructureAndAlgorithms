@@ -5,7 +5,7 @@ public:
         int sl = s.length();
 
         vector<int> ans;
-        
+
         if (sl < pl) {
             return ans;
         }

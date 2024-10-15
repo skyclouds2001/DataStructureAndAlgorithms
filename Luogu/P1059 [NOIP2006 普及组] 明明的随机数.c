@@ -11,7 +11,7 @@ int main()
 	{
 		scanf("%hd",a+i);
 	    b[i]=0;
-	}	    
+	}
 	for(i=0,M=0;i<N;i++)
 	{
 		if(check(a,i))

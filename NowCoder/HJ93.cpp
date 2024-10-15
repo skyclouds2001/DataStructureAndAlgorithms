@@ -18,7 +18,7 @@ double target;
 
 bool find(const vector<int>& list, const int pos, const int sum, const double& target) {
     const int size = list.size();
-    
+
     if (sum == target) {
         return true;
     }
@@ -53,12 +53,12 @@ int main(int argc, char const *argv[]) {
     }
 
     target = sum / 2.0 - sum5;
-    
+
     if (DEBUG) cout << sum5 << ' ' << sum3 << ' ' << sum << endl;
     if (DEBUG) cout << target << endl;
 
     bool flag = find(list, 0, 0, target);
-    
+
     cout << (flag ? "true" : "false") << endl;
 
     return 0;

@@ -1,5 +1,5 @@
 /**
- * @param {Array} array 
+ * @param {Array} array
  * @returns {Array}
  */
 function removeDuplicated(array) {
@@ -7,19 +7,19 @@ function removeDuplicated(array) {
 }
 
 /**
- * @param {Array} array 
+ * @param {Array} array
  * @returns {Array}
  */
 function removeDuplicated(array) {
     const obj = {}
-    array.forEach(val => 
+    array.forEach(val =>
         obj[val] = 0
     )
     return Object.keys(obj).map(val => Number(val))
 }
 
 /**
- * @param {Array} array 
+ * @param {Array} array
  * @returns {Array}
  */
 function removeDuplicated(array) {
@@ -78,7 +78,7 @@ function judge(s) {
                 break
         }
     }
-    
+
     if (stack.length > 0) {
         return false
     }

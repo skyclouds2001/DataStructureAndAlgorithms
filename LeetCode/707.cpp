@@ -4,7 +4,7 @@ public:
         this -> head = new ListNode(0);
         this -> size = 0;
     }
-    
+
     int get(int index) {
         if (index < 0 || index >= this -> size) {
             return -1;
@@ -16,14 +16,14 @@ public:
             return p -> val;
         }
     }
-    
+
     void addAtHead(int val) {
-        ListNode* p = new ListNode(val); 
+        ListNode* p = new ListNode(val);
         p -> next = this -> head -> next;
         this -> head -> next = p;
         this -> size += 1;
     }
-    
+
     void addAtTail(int val) {
         ListNode* p = this -> head;
         while (p -> next != NULL) {
@@ -32,7 +32,7 @@ public:
         p -> next = new ListNode(val);
         this -> size += 1;
     }
-    
+
     void addAtIndex(int index, int val) {
         if (index < 0 || index > this -> size) {
             return;
@@ -49,7 +49,7 @@ public:
             this -> size += 1;
         }
     }
-    
+
     void deleteAtIndex(int index) {
         if (index < 0 || index >= this -> size) {
             return;

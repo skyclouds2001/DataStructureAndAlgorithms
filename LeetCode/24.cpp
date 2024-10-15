@@ -8,7 +8,7 @@ public:
             ListNode* t1 = cur -> next;
             ListNode* t2 = cur -> next -> next;
             ListNode* t3 = cur -> next -> next -> next;
-            
+
             t2 -> next = t1;
             t1 -> next = t3;
             cur -> next = t2;

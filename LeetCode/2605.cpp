@@ -6,7 +6,7 @@ public:
         }
 
         unordered_set<int> set(nums1.begin(), nums1.end());
-        
+
         int f = INT_MAX;
 
         for (auto n: nums2) {

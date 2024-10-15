@@ -16,11 +16,11 @@ int main()
 		{
 			f[j]=0;
 		}
-	}    
+	}
 	for(i=0;i<=l;i++)
 	{
 		if(f[i]==1)  count++;
 	}
 	printf("%hd",count);
 	return 0;
- } 
+ }

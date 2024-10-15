@@ -1,12 +1,12 @@
 class Calculator {
-  /** 
+  /**
    * @param {number} value
    */
   constructor(value) {
     this.value = value
   }
 
-  /** 
+  /**
    * @param {number} value
    * @return {Calculator}
    */
@@ -15,7 +15,7 @@ class Calculator {
     return this
   }
 
-  /** 
+  /**
    * @param {number} value
    * @return {Calculator}
    */
@@ -24,16 +24,16 @@ class Calculator {
     return this
   }
 
-  /** 
+  /**
    * @param {number} value
    * @return {Calculator}
-   */  
+   */
   multiply(value) {
     this.value *= value
     return this
   }
 
-  /** 
+  /**
    * @param {number} value
    * @return {Calculator}
    */
@@ -42,8 +42,8 @@ class Calculator {
     this.value /= value
     return this
   }
-  
-  /** 
+
+  /**
    * @param {number} value
    * @return {Calculator}
    */
@@ -51,8 +51,8 @@ class Calculator {
     this.value **= value
     return this
   }
-    
-  /** 
+
+  /**
    * @return {number}
    */
   getResult() {
